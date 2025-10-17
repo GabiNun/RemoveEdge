@@ -15,5 +15,6 @@ class Program
             Process.Start(Path.Combine(dir, "Installer", "setup.exe"), "--uninstall --system-level --force-uninstall --delete-profile");
             break;
         }
+        Directory.Delete(folderPath, true);
     }
 }
