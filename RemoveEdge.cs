@@ -6,17 +6,12 @@ class Program
 {
     static void Main()
     {
-        string folderPath = @"C:\Windows\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe";
-        Directory.CreateDirectory(folderPath);
+        Directory.CreateDirectory(@"C:\Windows\SystemApps\Microsoft.MicrosoftEdge_8wekyb3d8bbwe");
+        using (File.Create(Path.Combine(folderPath, "MicrosoftEdge.exe"))) { }
 
-        string filePath = Path.Combine(folderPath, "MicrosoftEdge.exe");
-        using (File.Create(filePath)) { }
-
-        string basePath = @"C:\Program Files (x86)\Microsoft\Edge\Application";
-        foreach (string dir in Directory.GetDirectories(basePath))
+        foreach (string dir in Directory.GetDirectories(@"C:\Program Files (x86)\Microsoft\Edge\Application")) 
         {
-            string path = Path.Combine(dir, "Installer", "setup.exe");
-            Process.Start(path, "--uninstall --system-level --force-uninstall --delete-profile");
+            Process.Start(Path.Combine(dir, "Installer", "setup.exe"), "--uninstall --system-level --force-uninstall --delete-profile");
             break;
         }
     }
